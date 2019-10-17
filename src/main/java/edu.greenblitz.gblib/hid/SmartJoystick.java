@@ -80,6 +80,7 @@ public class SmartJoystick {
      * This constructor uses a joystick and assigns it button values and numbers.
      *
      * @param stick The joystick object.
+     * @param deadzone values if the stick below it will count as 0.
      */
     public SmartJoystick(Joystick stick, double deadzone) {
         this.deadzone = deadzone;
