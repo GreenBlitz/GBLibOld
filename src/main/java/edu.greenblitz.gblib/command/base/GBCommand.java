@@ -34,7 +34,7 @@ public abstract class GBCommand extends Command {
     }
 
     public void requires(GBSubsystem... requirements) {
-        for (var requirement : requirements) {
+        for (GBSubsystem requirement : requirements) {
             requires(requirement);
         }
     }

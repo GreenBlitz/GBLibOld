@@ -40,7 +40,7 @@ public interface IEncoder {
 
     boolean isInverted();
 
-    private int invert() {
+    default int invert() {
         return isInverted() ? -1 : 1;
     }
 }

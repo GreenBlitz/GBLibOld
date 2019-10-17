@@ -22,7 +22,7 @@ public abstract class CommandChain extends CommandGroup {
     }
 
     public void addParallel(Command... commands) {
-        for (var cmd : commands) {
+        for (Command cmd : commands) {
             addParallel(cmd);
         }
     }
