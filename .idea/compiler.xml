@@ -4,10 +4,8 @@
     <bytecodeTargetLevel>
       <module name="com.github.GreenBlitz.GBLib.main" target="11" />
       <module name="com.github.GreenBlitz.GBLib.test" target="11" />
-      <module name="GBLib.GBLib.main" target="1.8" />
-      <module name="GBLib.GBLib.test" target="1.8" />
-      <module name="GBLib.main" target="11" />
-      <module name="GBLib.test" target="11" />
+      <module name="GBLib.GBLib.main" target="11" />
+      <module name="GBLib.GBLib.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
