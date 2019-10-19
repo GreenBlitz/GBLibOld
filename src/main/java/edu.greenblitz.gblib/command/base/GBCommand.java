@@ -1,12 +1,12 @@
 package edu.greenblitz.gblib.command.base;
 
-import edu.greenblitz.gblib.command.GBSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
+import java.util.Vector;
 
 public abstract class GBCommand extends Command {
     protected static final Logger logger = LogManager.getLogger(GBCommand.class);
@@ -28,13 +28,28 @@ public abstract class GBCommand extends Command {
         }
     }
 
+    public Vector<Subsystem> getRequirements(){
+        try {
+            return (Vector<Subsystem>) GBCommand.requirements.get(GBCommand.requirementsSet.get(this));
+        } catch (IllegalAccessException e) {
+            return null;
+        }
+    }
+
+
     public void addRequirements(Iterable<? extends Subsystem> systems) {
         for (Subsystem s : systems)
             requires(s);
     }
 
-    public void requires(GBSubsystem... requirements) {
-        for (GBSubsystem requirement : requirements) {
+    public void requires(Subsystem... requirements) {
+        for (Subsystem requirement : requirements) {
+            requires(requirement);
+        }
+    }
+
+    public void requires(Iterable<Subsystem> requirements) {
+        for (Subsystem requirement : requirements) {
             requires(requirement);
         }
     }
