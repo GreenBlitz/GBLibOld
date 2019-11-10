@@ -1,9 +1,7 @@
-package edu.greenblitz.gblib.command;
+package edu.greenblitz.gblib.command.linked;
 
 import edu.greenblitz.gblib.command.base.GBCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import java.util.Vector;
 
 public abstract class LinkedCommand extends GBCommand {
 
@@ -77,6 +75,10 @@ public abstract class LinkedCommand extends GBCommand {
     public LinkedCommand(String name, double timeout, Subsystem subsystem, LinkedCommand next) {
         super(name, timeout, subsystem);
         this.next = next;
+    }
+
+    public void setNext(LinkedCommand link){
+        this.next = link;
     }
 
     @Override

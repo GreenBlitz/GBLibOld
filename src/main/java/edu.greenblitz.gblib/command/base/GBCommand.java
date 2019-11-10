@@ -11,8 +11,8 @@ import java.util.Vector;
 public abstract class GBCommand extends Command {
     protected static final Logger logger = LogManager.getLogger(GBCommand.class);
 
-    private static final Field requirements;
-    private static final Field requirementsSet;
+    protected static final Field requirements;
+    protected static final Field requirementsSet;
 
     protected boolean interrupted = false;
 
