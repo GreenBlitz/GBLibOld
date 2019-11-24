@@ -14,7 +14,9 @@ public class LinkedCommandListBuilder {
     }
 
     public LinkedCommandListBuilder add(LinkedCommand command){
-        commands.get(commands.size() - 1).setNext(command);
+        if (commands.size() > 0) {
+            commands.get(commands.size() - 1).setNext(command);
+        }
         commands.add(command);
         return this;
     }
