@@ -34,7 +34,7 @@ public class LinkedCommandWrapper extends LinkedCommand {
     @Override
     protected void atInit(){
         this.setInterruptible(command.isInterruptible());
-     //   command.start();
+        command.start();
     }
 
     @Override
