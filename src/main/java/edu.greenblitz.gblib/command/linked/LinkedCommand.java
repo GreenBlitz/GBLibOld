@@ -90,6 +90,12 @@ public abstract class LinkedCommand extends GBCommand {
         }
     }
 
+    @Override
+    public void start(){
+        System.out.println("Started");
+        super.start();
+    }
+
     /**
      * executed when <code>atEnd</code> is called
      */

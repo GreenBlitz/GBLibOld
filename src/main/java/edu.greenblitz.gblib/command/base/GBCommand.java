@@ -1,11 +1,13 @@
 package edu.greenblitz.gblib.command.base;
 
+import com.revrobotics.CANSparkMaxFrames;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
+import java.time.Clock;
 import java.util.Vector;
 
 public abstract class GBCommand extends Command {
@@ -49,6 +51,7 @@ public abstract class GBCommand extends Command {
     }
 
     public void requires(Iterable<Subsystem> requirements) {
+        System.out.println("requires test print");
         for (Subsystem requirement : requirements) {
             requires(requirement);
         }
