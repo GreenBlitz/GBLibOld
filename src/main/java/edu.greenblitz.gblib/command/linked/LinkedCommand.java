@@ -3,6 +3,9 @@ package edu.greenblitz.gblib.command.linked;
 import edu.greenblitz.gblib.command.base.GBCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class LinkedCommand extends GBCommand {
 
     private LinkedCommand next;
@@ -85,16 +88,8 @@ public abstract class LinkedCommand extends GBCommand {
     protected final void atEnd() {
         beforeNextLink();
         if (!(interrupted || next == null)){
-            System.out.println("requires");
-            next.requires(getRequirements());
             next.start();
         }
-    }
-
-    @Override
-    public void start(){
-        System.out.println("Started");
-        super.start();
     }
 
     /**

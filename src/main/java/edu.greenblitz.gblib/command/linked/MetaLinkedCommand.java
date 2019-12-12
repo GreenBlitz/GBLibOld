@@ -8,7 +8,7 @@ public class MetaLinkedCommand extends LinkedCommand {
     }
 
     @Override
-    protected boolean isFinished() {
+    protected final boolean isFinished() {
         return true;
     }
 }
