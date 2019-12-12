@@ -85,6 +85,7 @@ public abstract class LinkedCommand extends GBCommand {
     protected final void atEnd() {
         beforeNextLink();
         if (!(interrupted || next == null)){
+            System.out.println("requires");
             next.requires(getRequirements());
             next.start();
         }
