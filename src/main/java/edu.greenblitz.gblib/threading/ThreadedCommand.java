@@ -15,7 +15,7 @@ public class ThreadedCommand extends GBCommand {
         shouldStop = false;
 
         Runnable wrapper = () -> {
-            if (!shouldStop && !isFinished()){
+            while (!shouldStop && !isFinished()){
                 threadable.run();
             }
         };
