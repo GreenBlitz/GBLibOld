@@ -36,6 +36,7 @@ public class ThreadedCommand extends GBCommand {
 
     @Override
     protected void atInit() {
+        shouldStop = false;
         myThread = new Thread(wrapper);
         threadable.atInit();
         myThread.start();
