@@ -7,6 +7,7 @@ public class ThreadedCommand extends GBCommand {
 
     private Thread myThread;
     private IThreadable threadable;
+    private Runnable wrapper;
     private boolean shouldStop;
 
     public ThreadedCommand(IThreadable func, Subsystem... req){
@@ -14,7 +15,7 @@ public class ThreadedCommand extends GBCommand {
         threadable = func;
         shouldStop = false;
 
-        Runnable wrapper = () -> {
+        wrapper = () -> {
             while (!shouldStop && !isFinished()){
                 threadable.run();
             }
@@ -29,11 +30,13 @@ public class ThreadedCommand extends GBCommand {
 
     @Override
     protected void atEnd() {
+        shouldStop = true;
         threadable.atEnd();
     }
 
     @Override
     protected void atInit() {
+        myThread = new Thread(wrapper);
         threadable.atInit();
         myThread.start();
     }
