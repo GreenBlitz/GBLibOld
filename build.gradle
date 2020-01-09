@@ -35,27 +35,11 @@ allprojects {
             }
         }
     }
+    
+    apply plugin: 'java'
+    sourceCompatibility = 1.11
+    targetCompatibility = 1.11
 
-}
-
-deploy {
-    targets {
-        roboRIO("roborio") {
-            team = frc.getTeamNumber()
-        }
-    }
-    artifacts {
-        frcJavaArtifact('frcJava') {
-            targets << "roborio"
-            debug = frc.getDebugOrDefault(false)
-        }
-
-        fileTreeArtifact('frcStaticFileDeploy') {
-            files = fileTree(dir: 'src/main/deploy')
-            targets << "roborio"
-            directory = '/home/lvuser/deploy'
-        }
-    }
 }
 
 repositories {
