@@ -11,6 +11,10 @@ public abstract class GBCommand implements Command {
 
     private Set<Subsystem> systems;
 
+    public GBCommand(){
+        this.systems = new HashSet<>();
+    }
+
     public GBCommand(Subsystem... systems){
         this.systems = new HashSet<>();
         this.systems.addAll(Arrays.asList(systems));
