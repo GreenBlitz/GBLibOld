@@ -7,12 +7,8 @@ public class NavxGyro implements IGyroscope {
 
     private AHRS navx;
 
-    public NavxGyro(){
-        this(SPI.Port.kMXP);
-    }
-
-    public NavxGyro(SPI.Port p){
-        navx = new AHRS(p);
+    public NavxGyro(AHRS navx){
+        this.navx = navx;
     }
 
     @Override
@@ -28,5 +24,9 @@ public class NavxGyro implements IGyroscope {
     @Override
     public void reset() {
         navx.reset();
+    }
+
+    public AHRS getNavx(){
+        return navx;
     }
 }

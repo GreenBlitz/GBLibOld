@@ -6,6 +6,8 @@
       <module name="com.github.GreenBlitz.GBLib.test" target="11" />
       <module name="GBLib.GBLib.main" target="11" />
       <module name="GBLib.GBLib.test" target="11" />
+      <module name="GBLib.main" target="11" />
+      <module name="GBLib.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
