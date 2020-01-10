@@ -21,7 +21,7 @@ public class RoborioEncoder extends AbstractEncoder {
 
     @Override
     public int getRawTicks() {
-        return m_encoder.get();
+        return m_encoder.getRaw();
     }
 
     @Override
