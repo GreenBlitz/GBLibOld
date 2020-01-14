@@ -26,6 +26,11 @@ public interface IGyroscope {
     }
 
     /**
+     * Change the direction of growth of the angle
+     */
+    void inverse();
+
+    /**
      *
      * @return The change in yaw in radians per second
      */

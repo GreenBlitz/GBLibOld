@@ -5,6 +5,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 public class PigeonGyro implements IGyroscope {
 
     private PigeonIMU birb;
+    private int inversed = 1;
 
     public PigeonGyro(PigeonIMU bird){
         birb = bird;
@@ -14,7 +15,12 @@ public class PigeonGyro implements IGyroscope {
     public double getRawYaw() {
         double[] vals = new double[3];
         birb.getYawPitchRoll(vals);
-        return Math.toRadians(vals[0]);
+        return Math.toRadians(vals[0]) * inversed;
+    }
+
+    @Override
+    public void inverse() {
+        inversed *= -1;
     }
 
     @Override
