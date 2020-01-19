@@ -31,9 +31,9 @@ public class GBi2c {
     public static byte[] receive(int address){
         byte[] length = new byte[4];
         Rpi.read(address, 4, length);
-        byte[] data = new byte[GBI2Cv2.readLength(length)];
-        Rpi.read(address, GBI2Cv2.readLength(length), data);
-        if(length.equals(Arrays.copyOfRange(data, 0, 4))){
+        byte[] data = new byte[GBi2c.readLength(length)];
+        Rpi.read(address, GBi2c.readLength(length), data);
+        if(Arrays.equals(length, Arrays.copyOfRange(data, 0, 4))){
             System.out.println("please take add 4 to length and remove first four bytes in data");
         }
         return data;
