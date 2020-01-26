@@ -2,13 +2,14 @@ package edu.greenblitz.gblib.encoder;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import edu.greenblitz.gblib.gears.GearDependentValue;
 
 public class SparkEncoder extends AbstractEncoder {
     private static final int SPARK_COUNT_RATIO = 42;
     private CANEncoder m_sparkEncoder;
     private int m_nullPosition;
 
-    public SparkEncoder(double normalizeConst, CANSparkMax sparkEncoder) {
+    public SparkEncoder(GearDependentValue<Double> normalizeConst, CANSparkMax sparkEncoder) {
         super(normalizeConst);
         m_sparkEncoder = sparkEncoder.getEncoder();
         m_nullPosition = 0;
