@@ -1,11 +1,12 @@
 package edu.greenblitz.gblib.encoder;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.greenblitz.gblib.gears.GearDependentValue;
 
 public class TalonEncoder extends AbstractEncoder {
     private TalonSRX m_talon;
 
-    public TalonEncoder(double normalizeConst, TalonSRX talon) {
+    public TalonEncoder(GearDependentValue<Double> normalizeConst, TalonSRX talon) {
         super(normalizeConst);
         m_talon = talon;
     }

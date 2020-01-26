@@ -1,8 +1,11 @@
 package edu.greenblitz.gblib.encoder;
 
+import edu.greenblitz.gblib.gears.Gear;
+import edu.greenblitz.gblib.gears.GearDependentValue;
+
 public abstract class AbstractEncoder implements IEncoder {
 
-    private double m_normalizeConst;
+    private GearDependentValue<Double> m_normalizeConst;
     private boolean m_inverted;
 
     /**
@@ -11,20 +14,27 @@ public abstract class AbstractEncoder implements IEncoder {
      *
      * @param normalizeConst A double of the ticks per meter of movement.
      */
-    public AbstractEncoder(double normalizeConst) {
-        if (normalizeConst == +0.0 || !Double.isFinite(normalizeConst))
+    public AbstractEncoder(GearDependentValue<Double> normalizeConst) {
+        if (normalizeConst.getValue(Gear.POWER) == +0.0 || !Double.isFinite(normalizeConst.getValue(Gear.POWER)))
+            throw new IllegalArgumentException("invalid ticks per meter value '" + normalizeConst + "'");
+        if (normalizeConst.getValue(Gear.SPEED) == +0.0 || !Double.isFinite(normalizeConst.getValue(Gear.SPEED)))
             throw new IllegalArgumentException("invalid ticks per meter value '" + normalizeConst + "'");
 
         m_normalizeConst = normalizeConst;
     }
 
     @Override
-    public double getNormalizeConst() {
+    public void switchGear(){
+
+    }
+
+    @Override
+    public GearDependentValue<Double> getNormalizeConst() {
         return m_normalizeConst;
     }
 
     @Override
-    public void setNormalizeConst(double value) {
+    public void setNormalizeConst(GearDependentValue<Double> value) {
         m_normalizeConst = value;
     }
 

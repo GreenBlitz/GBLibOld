@@ -1,5 +1,7 @@
 package edu.greenblitz.gblib.encoder;
 
+import edu.greenblitz.gblib.gears.GearDependentValue;
+
 public interface IEncoder {
 
     /**
@@ -7,6 +9,11 @@ public interface IEncoder {
      * Calling this while the motor is moving might be problematic.
      */
     void reset();
+
+    /**
+     * Call this to do any needed commands when switching gears.
+     */
+    void switchGear();
 
     /**
      *
@@ -20,12 +27,12 @@ public interface IEncoder {
      */
     double getTickRate();
 
-    double getNormalizeConst();
+    GearDependentValue<Double> getNormalizeConst();
 
-    void setNormalizeConst(double value);
+    void setNormalizeConst(GearDependentValue<Double> value);
 
     default double getNormalizedTicks() {
-        return getRawTicks() * invert() / getNormalizeConst();
+        return getRawTicks() * invert() / getNormalizeConst().getValue();
     }
 
     /**
@@ -33,7 +40,7 @@ public interface IEncoder {
      * @return velocity after conversion in m/s
      */
     default double getNormalizedVelocity() {
-        return getTickRate() * invert() / getNormalizeConst();
+        return getTickRate() * invert() / getNormalizeConst().getValue();
     }
 
     void invert(boolean inverted);

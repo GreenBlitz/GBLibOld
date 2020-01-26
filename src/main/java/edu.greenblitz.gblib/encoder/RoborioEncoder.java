@@ -1,16 +1,17 @@
 package edu.greenblitz.gblib.encoder;
 
+import edu.greenblitz.gblib.gears.GearDependentValue;
 import edu.wpi.first.wpilibj.Encoder;
 
 public class RoborioEncoder extends AbstractEncoder {
     private Encoder m_encoder;
 
-    public RoborioEncoder(double normalizeConst, Encoder encoder) {
+    public RoborioEncoder(GearDependentValue<Double> normalizeConst, Encoder encoder) {
         super(normalizeConst);
         m_encoder = encoder;
     }
 
-    public RoborioEncoder(double normalizeCost, int channelA, int channelB) {
+    public RoborioEncoder(GearDependentValue<Double> normalizeCost, int channelA, int channelB) {
         this(normalizeCost, new Encoder(channelA, channelB));
     }
 
