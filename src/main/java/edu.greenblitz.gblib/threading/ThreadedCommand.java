@@ -45,8 +45,12 @@ public class ThreadedCommand extends GBCommand {
         myThread.start();
     }
 
+    public void stop(){
+        shouldStop = true;
+    }
+
     @Override
     public boolean isFinished() {
-        return threadable.isFinished();
+        return threadable.isFinished() || shouldStop;
     }
 }
