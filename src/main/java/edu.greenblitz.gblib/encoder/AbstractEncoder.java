@@ -7,6 +7,8 @@ public abstract class AbstractEncoder implements IEncoder {
 
     private GearDependentValue<Double> m_normalizeConst;
     private boolean m_inverted;
+    private int accumulatedTicks;
+    private double accumulatedDistance;
 
     /**
      * This constructor receives the normalize constant of the motor controller.
@@ -20,12 +22,15 @@ public abstract class AbstractEncoder implements IEncoder {
         if (normalizeConst.getValue(Gear.SPEED) == +0.0 || !Double.isFinite(normalizeConst.getValue(Gear.SPEED)))
             throw new IllegalArgumentException("invalid ticks per meter value '" + normalizeConst + "'");
 
+        accumulatedTicks = 0;
+        accumulatedDistance = 0;
         m_normalizeConst = normalizeConst;
     }
 
     @Override
     public void switchGear(){
-
+        accumulatedDistance = getNormalizedTicks();
+        accumulatedTicks = getRawTicks();
     }
 
     @Override
@@ -36,6 +41,11 @@ public abstract class AbstractEncoder implements IEncoder {
     @Override
     public void setNormalizeConst(GearDependentValue<Double> value) {
         m_normalizeConst = value;
+    }
+
+    @Override
+    public double getNormalizedTicks() {
+        return ((getRawTicks() - accumulatedTicks) * invert() / getNormalizeConst().getValue()) + accumulatedDistance;
     }
 
     @Override
