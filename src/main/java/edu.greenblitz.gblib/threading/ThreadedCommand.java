@@ -24,7 +24,7 @@ public class ThreadedCommand extends GBCommand {
         myThread = new Thread(wrapper);
 
         for (Subsystem sys : req){
-            requires(sys);
+            require(sys);
         }
     }
 
