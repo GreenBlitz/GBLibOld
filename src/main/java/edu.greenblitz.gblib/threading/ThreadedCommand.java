@@ -10,22 +10,20 @@ public class ThreadedCommand extends GBCommand {
     private Runnable wrapper;
     private boolean shouldStop;
 
+    protected ThreadedCommand(Subsystem... req){
+        this(null, req);
+    }
+
     public ThreadedCommand(IThreadable func, Subsystem... req){
-
         threadable = func;
-        shouldStop = false;
-
-        wrapper = () -> {
-            while (!shouldStop && !isFinished()){
-                threadable.run();
-            }
-        };
-
-        myThread = new Thread(wrapper);
 
         for (Subsystem sys : req){
             require(sys);
         }
+    }
+
+    public void setThreadable(IThreadable newThreadable){
+        threadable = newThreadable;
     }
 
     @Override
@@ -39,8 +37,16 @@ public class ThreadedCommand extends GBCommand {
 
     @Override
     public void initialize() {
-        shouldStop = false;
+
+        wrapper = () -> {
+            while (!shouldStop && !isFinished()){
+                threadable.run();
+            }
+        };
+
         myThread = new Thread(wrapper);
+
+        shouldStop = false;
         threadable.atInit();
         myThread.start();
     }
