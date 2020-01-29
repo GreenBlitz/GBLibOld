@@ -1,9 +1,14 @@
 package edu.greenblitz.gblib.encoder;
 
+import edu.greenblitz.gblib.gears.Gear;
+import edu.greenblitz.gblib.gears.GearDependentValue;
+
 public abstract class AbstractEncoder implements IEncoder {
 
-    private double m_normalizeConst;
+    private GearDependentValue<Double> m_normalizeConst;
     private boolean m_inverted;
+    private int accumulatedTicks;
+    private double accumulatedDistance;
 
     /**
      * This constructor receives the normalize constant of the motor controller.
@@ -11,21 +16,36 @@ public abstract class AbstractEncoder implements IEncoder {
      *
      * @param normalizeConst A double of the ticks per meter of movement.
      */
-    public AbstractEncoder(double normalizeConst) {
-        if (normalizeConst == +0.0 || !Double.isFinite(normalizeConst))
+    public AbstractEncoder(GearDependentValue<Double> normalizeConst) {
+        if (normalizeConst.getValue(Gear.POWER) == +0.0 || !Double.isFinite(normalizeConst.getValue(Gear.POWER)))
+            throw new IllegalArgumentException("invalid ticks per meter value '" + normalizeConst + "'");
+        if (normalizeConst.getValue(Gear.SPEED) == +0.0 || !Double.isFinite(normalizeConst.getValue(Gear.SPEED)))
             throw new IllegalArgumentException("invalid ticks per meter value '" + normalizeConst + "'");
 
+        accumulatedTicks = 0;
+        accumulatedDistance = 0;
         m_normalizeConst = normalizeConst;
     }
 
     @Override
-    public double getNormalizeConst() {
+    public void switchGear(){
+        accumulatedDistance = getNormalizedTicks();
+        accumulatedTicks = getRawTicks();
+    }
+
+    @Override
+    public GearDependentValue<Double> getNormalizeConst() {
         return m_normalizeConst;
     }
 
     @Override
-    public void setNormalizeConst(double value) {
+    public void setNormalizeConst(GearDependentValue<Double> value) {
         m_normalizeConst = value;
+    }
+
+    @Override
+    public double getNormalizedTicks() {
+        return ((getRawTicks() - accumulatedTicks) * invert() / getNormalizeConst().getValue()) + accumulatedDistance;
     }
 
     @Override

@@ -24,7 +24,7 @@ public abstract class GBCommand implements Command {
         this.systems.add(sys);
     }
 
-    public boolean requires(Subsystem sys){
+    public boolean doesRequire(Subsystem sys){
         return systems.contains(sys);
     }
 
