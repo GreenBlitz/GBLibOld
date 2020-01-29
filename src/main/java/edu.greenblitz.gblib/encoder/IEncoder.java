@@ -22,8 +22,16 @@ public interface IEncoder {
 
     double getNormalizeConst();
 
+    /**
+     *
+     * @param value the value to normalize by
+     */
     void setNormalizeConst(double value);
 
+    /**
+     *
+     * @return raw ticks divided by normalize const and inverted as needed.
+     */
     default double getNormalizedTicks() {
         return getRawTicks() * invert() / getNormalizeConst();
     }

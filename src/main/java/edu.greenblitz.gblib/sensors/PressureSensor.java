@@ -9,7 +9,7 @@ public class PressureSensor extends AnalogInput {
     }
 
     public double getPressure() {
-        return Math.max(0, (250 * getVoltage() / 5) - 29/*25 (Through testing, subtracted 4 from the original formula)*/); 
+        return Math.max(0, (250 * getVoltage() / 5) - 29/*25 (Through testing, subtracted 4 from the original formula)*/);
     }
 
     public double getAveragePressure() {

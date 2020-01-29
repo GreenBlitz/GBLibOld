@@ -1,7 +1,7 @@
 package edu.greenblitz.gblib.threading;
 
-import edu.greenblitz.gblib.command.base.GBCommand;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.greenblitz.gblib.command.GBCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class ThreadedCommand extends GBCommand {
 
@@ -29,13 +29,16 @@ public class ThreadedCommand extends GBCommand {
     }
 
     @Override
-    protected void atEnd() {
+    public void end(boolean interrupted) {
         shouldStop = true;
-        threadable.atEnd();
+        if (interrupted)
+            threadable.atInterrupt();
+        else
+            threadable.atEnd();
     }
 
     @Override
-    protected void atInit() {
+    public void initialize() {
         shouldStop = false;
         myThread = new Thread(wrapper);
         threadable.atInit();
@@ -43,13 +46,7 @@ public class ThreadedCommand extends GBCommand {
     }
 
     @Override
-    protected void atInterrupt(){
-        shouldStop = true;
-        threadable.atInterrupt();
-    }
-
-    @Override
-    protected boolean isFinished() {
+    public boolean isFinished() {
         return threadable.isFinished();
     }
 }
