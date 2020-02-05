@@ -5,6 +5,7 @@ public class RS232 {
     SerialPort rs232;
     public RS232(){
     rs232 = new SerialPort(9600, SerialPort.Port.kOnboard);
+    rs232.setWriteBufferMode(SerialPort.WriteBufferMode.kFlushOnAccess);
     }
     public static byte[] getLength(byte[] data){
         int ln = data.length;
@@ -32,7 +33,7 @@ public class RS232 {
     }
     public void send(byte[] data){
 
-        //rs232.write(getLength(data), getLength(data).length);
+        rs232.write(getLength(data), getLength(data).length);
 
     }
 

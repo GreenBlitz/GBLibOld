@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="com.github.GreenBlitz.GBLib.main" target="11" />
+      <module name="com.github.GreenBlitz.GBLib.test" target="11" />
       <module name="GBLib.main" target="11" />
       <module name="GBLib.test" target="11" />
     </bytecodeTargetLevel>
