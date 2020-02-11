@@ -9,7 +9,7 @@ import java.util.Set;
 
 public abstract class GBCommand implements Command {
 
-    private Set<Subsystem> systems;
+    protected Set<Subsystem> systems;
 
     public GBCommand(){
         this.systems = new HashSet<>();
