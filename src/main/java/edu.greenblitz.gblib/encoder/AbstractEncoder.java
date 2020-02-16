@@ -25,6 +25,7 @@ public abstract class AbstractEncoder implements IEncoder {
         accumulatedTicks = 0;
         accumulatedDistance = 0;
         m_normalizeConst = normalizeConst;
+
     }
 
     @Override
@@ -57,4 +58,5 @@ public abstract class AbstractEncoder implements IEncoder {
     public boolean isInverted() {
         return m_inverted;
     }
+
 }

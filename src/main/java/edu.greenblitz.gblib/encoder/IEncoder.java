@@ -58,4 +58,5 @@ public interface IEncoder {
     default int invert() {
         return isInverted() ? -1 : 1;
     }
+
 }

@@ -9,6 +9,7 @@ public class RoborioEncoder extends AbstractEncoder {
     public RoborioEncoder(GearDependentValue<Double> normalizeConst, Encoder encoder) {
         super(normalizeConst);
         m_encoder = encoder;
+        encoder.setDistancePerPulse(1.0);
     }
 
     public RoborioEncoder(GearDependentValue<Double> normalizeCost, int channelA, int channelB) {
