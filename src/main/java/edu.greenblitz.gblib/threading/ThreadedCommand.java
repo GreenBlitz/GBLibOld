@@ -33,6 +33,7 @@ public class ThreadedCommand extends GBCommand {
             threadable.atInterrupt();
         else
             threadable.atEnd();
+        myThread.interrupt();
     }
 
     @Override
