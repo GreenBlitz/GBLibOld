@@ -15,7 +15,7 @@ jobs:
         java-version: 11.0
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Download dependencies
-      run: ./gradlew downloadAll
+#    - name: Download dependencies
+#      run: ./gradlew downloadAll
     - name: Build with Gradle
       run: ./gradlew build
