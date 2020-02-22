@@ -9,6 +9,18 @@ public abstract class AbstractChassis extends GBSubsystem {
     protected IEncoder leftEncoder, rightEncoder;
     protected IGyroscope gyroscope;
 
+    public void setLeftEncoder(IEncoder leftEncoder) {
+        this.leftEncoder = leftEncoder;
+    }
+
+    public void setRightEncoder(IEncoder rightEncoder) {
+        this.rightEncoder = rightEncoder;
+    }
+
+    public void setGyroscope(IGyroscope gyroscope) {
+        this.gyroscope = gyroscope;
+    }
+
     public abstract void tankDrive(double leftPower, double rightPower);
 
     public void resetGyro(){
