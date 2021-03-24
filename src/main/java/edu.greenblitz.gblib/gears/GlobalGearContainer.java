@@ -14,7 +14,7 @@ public class GlobalGearContainer {
     }
 
     private GlobalGearContainer(){
-        gear = Gear.POWER;
+        gear = Gear.SPEED;
     }
 
     public void setGear(Gear value){
