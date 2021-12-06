@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
+import java.util.HashMap;
+
 /**
  * This class is in charge of making the Joystick easy to assign things to buttons and invert the axes of the joystick.
  * The class uses m_joystick as the main joystick, and uses button values and enums in order to assign thing to those buttons.
@@ -71,7 +73,7 @@ public class SmartJoystick {
      * This constructor constructs the joystick based on the joystick port we give it.
      *
      * @param joystick_port The port of the joystick.
-     * @param deadzone values if the stick below it will count as 0.
+     * @param deadzone      values if the stick below it will count as 0.
      */
     public SmartJoystick(int joystick_port, double deadzone) {
         this(new Joystick(joystick_port), deadzone);
@@ -89,7 +91,7 @@ public class SmartJoystick {
     /**
      * This constructor uses a joystick and assigns it button values and numbers.
      *
-     * @param stick The joystick object.
+     * @param stick    The joystick object.
      * @param deadzone values if the stick below it will count as 0.
      */
     public SmartJoystick(Joystick stick, double deadzone) {
@@ -111,7 +113,7 @@ public class SmartJoystick {
         POV_LEFT = new POVButton(m_joystick, 270);
     }
 
-    public SmartJoystick(Joystick stick){
+    public SmartJoystick(Joystick stick) {
         this(stick, DEADZONE);
     }
 
@@ -162,11 +164,38 @@ public class SmartJoystick {
 
     /**
      * Rumbles the controller at a certain side
-     * @param left rumble side (false for left)
+     *
+     * @param left  rumble side (false for left)
      * @param power normalized rumble [0, 1]
      */
     public void rumble(boolean left, double power) {
         m_joystick.setRumble(left ? GenericHID.RumbleType.kLeftRumble : GenericHID.RumbleType.kRightRumble, power);
         SmartDashboard.putNumber((left ? "left" : "right") + " rumble", power);
+    }
+
+    public HashMap<String, Double> getButtonsOn() {
+        //todo: for now - 1 == button is on, 0 == button is of (for on/off buttons);
+        HashMap<String, Double> buttons = new HashMap<String, Double>();
+        // A, B, X, Y, L1, R1, START, BACK, L3, R3, POV_UP, POV_RIGHT, POV_DOWN, POV_LEFT;
+        buttons.put("A", A.get() ? 1.0 : 0.0);
+        buttons.put("B", B.get() ? 1.0 : 0.0);
+        buttons.put("X", X.get() ? 1.0 : 0.0);
+        buttons.put("Y", Y.get() ? 1.0 : 0.0);
+        buttons.put("L1", L1.get() ? 1.0 : 0.0);
+        buttons.put("R1", R1.get() ? 1.0 : 0.0);
+        buttons.put("START", START.get() ? 1.0 : 0.0);
+        buttons.put("BACK", BACK.get() ? 1.0 : 0.0);
+        buttons.put("L3", L3.get() ? 1.0 : 0.0);
+        buttons.put("POV_UP", POV_UP.get() ? 1.0 : 0.0);
+        buttons.put("POV_RIGHT", POV_RIGHT.get() ? 1.0 : 0.0);
+        buttons.put("POV_DOWN", POV_DOWN.get() ? 1.0 : 0.0);
+        buttons.put("POV_LEFT", POV_LEFT.get() ? 1.0 : 0.0);
+        buttons.put("LEFT_X", Axis.LEFT_X.getValue(this));
+        buttons.put("LEFT_Y", Axis.LEFT_Y.getValue(this));
+        buttons.put("LEFT_TRIGGER", Axis.LEFT_TRIGGER.getValue(this));
+        buttons.put("RIGHT_TRIGGER", Axis.RIGHT_TRIGGER.getValue(this));
+        buttons.put("RIGHT_X", Axis.RIGHT_X.getValue(this));
+        buttons.put("RIGHT_Y", Axis.RIGHT_Y.getValue(this));
+        return buttons;
     }
 }
