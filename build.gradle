@@ -5,9 +5,11 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2022.3.1"
 }
 
+    final group = 'com.github.GreenBlitz'
+
 allprojects {
     apply plugin: 'maven-publish'
-    group = 'com.github.GreenBlitz'
+
 
     task sourcesJar(type: Jar, dependsOn: classes) {
         archiveClassifier = 'sources'
@@ -28,8 +30,31 @@ allprojects {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 
+
 }
 
+apply plugin: 'maven-publish'
+
+// Replace nisrulz with <your_github_username>
+final artifact = "GBLibOld"
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            java(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.java
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = group
+                artifactId = artifact
+            }
+
+        }
+    }
+}
 repositories {
     maven { url "https://jitpack.io" }
     mavenCentral()
