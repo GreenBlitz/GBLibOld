@@ -1,12 +1,12 @@
 package edu.greenblitz.gblib.encoder;
 
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import edu.greenblitz.gblib.gears.GearDependentValue;
 
 public class SparkEncoder extends AbstractEncoder {
     private static final int SPARK_COUNT_RATIO = 42;
-    private CANEncoder m_sparkEncoder;
+    private RelativeEncoder m_sparkEncoder;
     private int m_nullPosition;
 
     public SparkEncoder(GearDependentValue<Double> normalizeConst, CANSparkMax sparkEncoder) {
@@ -30,7 +30,7 @@ public class SparkEncoder extends AbstractEncoder {
     }
 
     @Override
-    public int getRawTicks() {
+    public double getRawTicks() {
         return get() - m_nullPosition;
     }
 

@@ -19,7 +19,7 @@ public interface IEncoder {
      *
      * @return raw amount of ticks so far
      */
-    int getRawTicks();
+    double getRawTicks();
 
     /**
      *

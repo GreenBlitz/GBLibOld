@@ -7,7 +7,7 @@ public abstract class AbstractEncoder implements IEncoder {
 
     private GearDependentValue<Double> m_normalizeConst;
     private boolean m_inverted;
-    private int accumulatedTicks;
+    private double accumulatedTicks;
     private double accumulatedDistance;
 
     /**
